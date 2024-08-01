@@ -21,4 +21,4 @@ dependencyResolutionManagement {
 
 rootProject.name = "ABZ.Test"
 include(":app")
- 
+include(":domain")
