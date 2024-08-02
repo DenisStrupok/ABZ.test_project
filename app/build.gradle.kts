@@ -38,7 +38,7 @@ android {
 dependencies {
 
     implementation(project(":domain"))
-    implementation(project(":data"))
+
     //DI
     implementation("io.insert-koin:koin-android:3.5.6")
 
