@@ -1,8 +1,9 @@
 package com.abztest
 
 import android.app.Application
-import com.abztest.di.appDI
-import com.abztest.domain.di.domainDI
+import com.abztest.di.appModule
+import com.abztest.domain.di.domainModule
+import com.flirtzone.data.di.dataModule
 import org.koin.android.ext.koin.androidContext
 import org.koin.android.ext.koin.androidLogger
 import org.koin.core.context.startKoin
@@ -16,8 +17,9 @@ class App : Application() {
             androidLogger()
             androidContext(this@App)
             modules(
-                *appDI,
-                *domainDI
+                *appModule,
+                *domainModule,
+                *dataModule
             )
         }
     }
