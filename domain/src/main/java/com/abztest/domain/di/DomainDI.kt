@@ -4,8 +4,12 @@ import com.abztest.domain.usecases.TestUseCase
 import org.koin.dsl.module
 
 private val useCasesModule = module {
-    factory { TestUseCase() }
+    factory {
+        TestUseCase(
+            userRepository = get()
+        )
+    }
 
 }
 
-val domainDI = arrayOf(useCasesModule)
+val domainModule = arrayOf(useCasesModule)

@@ -10,7 +10,6 @@ java {
 
 dependencies {
     //DI
-   // implementation("io.insert-koin:koin-android:3.5.6")
-    implementation("io.insert-koin:koin-core:3.5.6")
+    implementation(libs.koin.core)
 
 }
