@@ -12,4 +12,4 @@ private val viewModelsModule = module {
     }
 }
 
-val appModules = arrayOf(viewModelsModule)
+val appDI = arrayOf(viewModelsModule)
