@@ -33,6 +33,10 @@ android {
     kotlinOptions {
         jvmTarget = "1.8"
     }
+
+    buildFeatures {
+        viewBinding = true
+    }
 }
 
 dependencies {
@@ -46,6 +50,9 @@ dependencies {
     //Navigation
     implementation(libs.androidx.navigation.fragment.ktx)
     implementation(libs.androidx.navigation.ui.ktx)
+
+    //ViewBinding
+    implementation("com.github.kirich1409:viewbindingpropertydelegate-full:1.5.9")
 
     implementation(libs.androidx.core.ktx)
     implementation(libs.androidx.appcompat)
