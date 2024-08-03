@@ -1,25 +1,20 @@
 package com.abztest.features.splash
 
-import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.abztest.domain.usecases.TestUseCase
+import com.abztest.domain.usecases.token.GetAccessTokenUseCase
 import kotlinx.coroutines.launch
 
 class SplashVM(
-    private val testUseCase: TestUseCase
+    private val getAccessTokenUseCase: GetAccessTokenUseCase
 ) : ViewModel() {
 
-    val test = MutableLiveData(false)
+    val check = MutableLiveData("")
 
     init {
-        testFun()
-    }
-
-    private fun testFun() {
         viewModelScope.launch {
-            test.value = testUseCase.invoke(TestUseCase.Params())
+            check.value = getAccessTokenUseCase.invoke(Unit)
         }
     }
 }

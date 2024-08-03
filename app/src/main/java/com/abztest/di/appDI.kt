@@ -7,7 +7,7 @@ import org.koin.dsl.module
 private val viewModelsModule = module {
     viewModel {
         SplashVM(
-            testUseCase = get()
+            getAccessTokenUseCase = get()
         )
     }
 }

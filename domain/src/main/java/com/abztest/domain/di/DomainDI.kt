@@ -1,12 +1,12 @@
 package com.abztest.domain.di
 
-import com.abztest.domain.usecases.TestUseCase
+import com.abztest.domain.usecases.token.GetAccessTokenUseCase
 import org.koin.dsl.module
 
 private val useCasesModule = module {
     factory {
-        TestUseCase(
-            userRepository = get()
+        GetAccessTokenUseCase(
+            accessRepository = get()
         )
     }
 
