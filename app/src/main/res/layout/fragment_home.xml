@@ -1,0 +1,123 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <View
+        android:id="@+id/topYellowView"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:background="@color/yellow"
+        app:layout_constraintBottom_toBottomOf="@id/tvTitle"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/tvTitle"
+        style="@style/BlackText20"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="16dp"
+        android:text="Working with GET request"
+        app:layout_constraintBottom_toBottomOf="@id/topYellowView"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@id/topYellowView" />
+
+    <ImageView
+        android:id="@+id/homeImageEmptyList"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@drawable/ic_empty_list"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/homeTVEmptyMessage"
+        style="@style/BlackText20"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:text="There are no users yet"
+        app:layout_constraintEnd_toEndOf="@id/homeImageEmptyList"
+        app:layout_constraintStart_toStartOf="@id/homeImageEmptyList"
+        app:layout_constraintTop_toBottomOf="@id/homeImageEmptyList" />
+
+    <androidx.constraintlayout.widget.Group
+        android:id="@+id/homeEmptyState"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:constraint_referenced_ids="homeImageEmptyList, homeTVEmptyMessage" />
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/homeListRV"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layoutAnimation="@anim/rv_animation"
+        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+        app:layout_constraintBottom_toTopOf="@id/homeProgressLoader"
+        app:layout_constraintTop_toBottomOf="@id/topYellowView" />
+
+    <LinearLayout
+        android:id="@+id/homeUsersContainer"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        app:layout_constraintBottom_toBottomOf="@id/homeAddUserContainer"
+        app:layout_constraintEnd_toStartOf="@id/homeAddUserContainer"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@id/homeAddUserContainer">
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/people_selector" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:text="Users"
+            android:textColor="@color/text_selector" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/homeAddUserContainer"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_margin="32dp"
+        android:gravity="center"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@id/homeUsersContainer">
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:src="@drawable/add_user_selector" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:text="Sing up"
+            android:textColor="@color/text_selector" />
+    </LinearLayout>
+    <ProgressBar
+        android:id="@+id/homeProgressLoader"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintStart_toStartOf="parent"
+        android:progressTint="@color/blue"
+        android:layout_marginBottom="16dp"
+        android:visibility="gone"
+        android:indeterminateTint="@color/blue"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintBottom_toTopOf="@id/homeAddUserContainer"/>
+</androidx.constraintlayout.widget.ConstraintLayout>
