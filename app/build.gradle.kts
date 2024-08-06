@@ -54,6 +54,9 @@ dependencies {
     //ViewBinding
     implementation("com.github.kirich1409:viewbindingpropertydelegate-full:1.5.9")
 
+    //Picasso
+    implementation("com.squareup.picasso:picasso:2.71828")
+
     implementation(libs.androidx.core.ktx)
     implementation(libs.androidx.appcompat)
     implementation(libs.material)

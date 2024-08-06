@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_margin="16dp">
+
+    <com.google.android.material.imageview.ShapeableImageView
+        android:id="@+id/itemUserImgV"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:layout_margin="16dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:shapeAppearance="@style/RoundedImage"
+        tools:background="@color/black"
+        tools:src="@drawable/people_selector" />
+
+    <TextView
+        android:id="@+id/itemUserNameTv"
+        style="@style/BlackText18"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@id/itemUserImgV"
+        app:layout_constraintTop_toTopOf="@id/itemUserImgV"
+        tools:text="Malcom Bailey" />
+
+    <TextView
+        android:id="@+id/itemUserPositionTv"
+        style="@style/GrayText16"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="8dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@id/itemUserImgV"
+        app:layout_constraintTop_toBottomOf="@id/itemUserNameTv"
+        tools:text="Developer" />
+
+    <TextView
+        android:id="@+id/itemUserEmailTv"
+        style="@style/BlackText14"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="8dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@id/itemUserImgV"
+        app:layout_constraintTop_toBottomOf="@id/itemUserPositionTv"
+        tools:text="devfv@gmail.com" />
+
+    <TextView
+        android:id="@+id/itemUserPhoneTv"
+        style="@style/BlackText14"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="8dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@id/itemUserImgV"
+        app:layout_constraintTop_toBottomOf="@id/itemUserEmailTv"
+        tools:text="+380982222222" />
+
+
+    <View
+        android:layout_width="0dp"
+        android:layout_height="2dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="16dp"
+        android:layout_marginBottom="0dp"
+        android:background="@color/gray"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="@id/itemUserPhoneTv"
+        app:layout_constraintTop_toBottomOf="@id/itemUserPhoneTv" />
+</androidx.constraintlayout.widget.ConstraintLayout>

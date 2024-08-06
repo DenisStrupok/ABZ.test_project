@@ -6,4 +6,37 @@
     </style>
 
     <style name="Theme.ABZTest" parent="Base.Theme.ABZTest" />
+
+    <style name="BlackText20">
+        <item name="fontFamily">@font/nunito_sans_regular</item>
+        <item name="android:textSize">20sp</item>
+        <item name="textAllCaps">false</item>
+        <item name="android:textColor">@color/text_black</item>
+    </style>
+
+    <style name="BlackText18">
+        <item name="fontFamily">@font/nunito_sans_regular</item>
+        <item name="android:textSize">18sp</item>
+        <item name="textAllCaps">false</item>
+        <item name="android:textColor">@color/text_black</item>
+    </style>
+
+    <style name="BlackText14">
+        <item name="fontFamily">@font/nunito_sans_regular</item>
+        <item name="android:textSize">14sp</item>
+        <item name="textAllCaps">false</item>
+        <item name="android:textColor">@color/text_black</item>
+    </style>
+
+    <style name="GrayText16">
+        <item name="fontFamily">@font/nunito_sans_regular</item>
+        <item name="android:textSize">16sp</item>
+        <item name="textAllCaps">false</item>
+        <item name="android:textColor">@color/gray</item>
+    </style>
+    
+    <style name="RoundedImage">
+        <item name="cornerFamily">rounded</item>
+        <item name="cornerSize">50%</item>
+    </style>
 </resources>

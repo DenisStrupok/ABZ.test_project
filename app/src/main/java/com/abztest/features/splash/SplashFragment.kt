@@ -7,23 +7,26 @@ import android.os.Bundle
 import android.view.View
 import android.widget.Toast
 import androidx.fragment.app.Fragment
+import androidx.navigation.fragment.findNavController
 import by.kirich1409.viewbindingdelegate.viewBinding
 import com.abztest.R
 import com.abztest.databinding.FragmentSplashBinding
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.delay
+import kotlinx.coroutines.launch
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class SplashFragment : Fragment(R.layout.fragment_splash) {
 
     private val viewModel: SplashVM by viewModel()
-    val viewBinding: FragmentSplashBinding by viewBinding()
+    val binding: FragmentSplashBinding by viewBinding()
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
         hideSystemBars()
         isInternetConnection()
-        viewModel.check.observe(viewLifecycleOwner) { it ->
-            Toast.makeText(requireContext(), "Token -> $it", Toast.LENGTH_SHORT).show()
-        }
+        findNavController().navigate(R.id.actionSplashFragmentToHomeFragment)
     }
 
     private fun hideSystemBars() {
