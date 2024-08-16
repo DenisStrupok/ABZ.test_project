@@ -43,4 +43,12 @@
         android:id="@+id/failedFragment"
         android:name="com.abztest.features.add.failed.FailedFragment"
         android:label="FailedFragment" />
+    <fragment
+        android:id="@+id/connectionErrorFragment"
+        android:name="com.abztest.features.connection.ConnectionErrorFragment"
+        android:label="ConnectionErrorFragment" />
+
+    <action
+        android:id="@+id/actionGlobalConnectionErrorFragment"
+        app:destination="@id/connectionErrorFragment" />
 </navigation>
