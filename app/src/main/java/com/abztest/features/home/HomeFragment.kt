@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.view.View
 import android.widget.Toast
 import androidx.fragment.app.Fragment
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import by.kirich1409.viewbindingdelegate.viewBinding
@@ -73,6 +74,7 @@ class HomeFragment : Fragment(R.layout.fragment_home) {
                 SELECTED_TYPE_ADD_USER -> {
                     binding.homeAddUserContainer.isSelected = true
                     binding.homeUsersContainer.isSelected = false
+                    findNavController().navigate(R.id.actionHomeFragmentToAddUserFragment)
                 }
 
                 SELECTED_TYPE_USERS -> {

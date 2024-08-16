@@ -18,5 +18,29 @@
         android:id="@+id/homeFragment"
         android:name="com.abztest.features.home.HomeFragment"
         android:label="HomeFragment"
-        tools:layout="@layout/fragment_home" />
+        tools:layout="@layout/fragment_home">
+
+        <action
+            android:id="@+id/actionHomeFragmentToAddUserFragment"
+            app:destination="@id/addUserFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/addUserFragment"
+        android:name="com.abztest.features.add.AddUserFragment"
+        android:label="AddUserFragment">
+        <action
+            android:id="@+id/actionAddUserFragmentToSuccessFragment"
+            app:destination="@id/successFragment" />
+        <action
+            android:id="@+id/actionAddUserFragmentToFailedFragment"
+            app:destination="@id/failedFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/successFragment"
+        android:name="com.abztest.features.add.success.SuccessFragment"
+        android:label="SuccessFragment" />
+    <fragment
+        android:id="@+id/failedFragment"
+        android:name="com.abztest.features.add.failed.FailedFragment"
+        android:label="FailedFragment" />
 </navigation>

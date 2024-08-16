@@ -26,13 +26,21 @@ class SplashFragment : Fragment(R.layout.fragment_splash) {
 
         hideSystemBars()
         isInternetConnection()
-        findNavController().navigate(R.id.actionSplashFragmentToHomeFragment)
+        initObserver()
     }
 
     private fun hideSystemBars() {
         requireActivity().window.decorView.systemUiVisibility = (View.SYSTEM_UI_FLAG_FULLSCREEN
                 or View.SYSTEM_UI_FLAG_HIDE_NAVIGATION
                 or View.SYSTEM_UI_FLAG_IMMERSIVE_STICKY)
+    }
+
+    private fun initObserver() = with(viewModel) {
+        token.observe(viewLifecycleOwner) { token ->
+            if (token.isNotEmpty()) {
+                findNavController().navigate(R.id.actionSplashFragmentToHomeFragment)
+            }
+        }
     }
 
     private fun isInternetConnection(): Boolean {

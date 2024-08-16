@@ -9,12 +9,12 @@ class AccessRepositoryImpl(
     private val tokenManager: TokenManger
 ) : AccessRepository {
     override suspend fun getAccessToken(): String {
-        if (tokenManager.isTokenValid()) {
-            val test = tokenManager.getAccessToken()
-            test.toString()
+        return if (!tokenManager.isTokenValid()) {
+            val token = tokenService.getToken()
+            tokenManager.saveAccessToken(token)
+            token.token
         } else {
-            tokenManager.saveAccessToken(tokenService.getToken())
+            tokenManager.getAccessToken() ?: ""
         }
-        return "Check data"
     }
 }
