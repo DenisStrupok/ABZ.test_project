@@ -17,12 +17,12 @@ data class LinksModel(
 )
 
 data class UserModel(
-    val id: Int?,
+    val id: Int? = null,
     val name: String?,
     val email: String?,
     val phone: String?,
-    val position: String?,
-    val positionID: String?,
-    val registrationTime: Long?,
+    val position: String? = null,
+    val positionID: String? = null,
+    val registrationTime: Long? = null,
     val photo: String?
 )

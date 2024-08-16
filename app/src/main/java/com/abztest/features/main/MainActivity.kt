@@ -16,11 +16,7 @@ class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
-        window.statusBarColor = Color.WHITE
-        window.navigationBarColor = Color.WHITE
-//
-//        val navHostFragment =
-//            supportFragmentManager.findFragmentById(R.id.navHost) as NavHostFragment
-//        navController = navHostFragment.navController
+        window.statusBarColor = Color.BLACK
+        window.navigationBarColor = Color.BLACK
     }
 }

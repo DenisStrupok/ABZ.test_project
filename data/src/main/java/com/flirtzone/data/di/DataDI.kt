@@ -18,7 +18,9 @@ import retrofit2.converter.gson.GsonConverterFactory
 private val repositoriesModule = module {
     single<UserRepository> {
         UserRepositoryImpl(
-            userService = get()
+            userService = get(),
+            tokenManager = get(),
+            context = androidContext()
         )
     }
     single<AccessRepository> {

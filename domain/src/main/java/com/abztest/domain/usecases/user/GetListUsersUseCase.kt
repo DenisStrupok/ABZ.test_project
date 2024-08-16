@@ -1,6 +1,5 @@
 package com.abztest.domain.usecases.user
 
-import com.abztest.domain.models.UserModel
 import com.abztest.domain.models.UserObjectModel
 import com.abztest.domain.repositories.UserRepository
 import com.abztest.domain.usecases.base.BaseUseCase

@@ -1,0 +1,171 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <EditText
+        android:id="@+id/addUserNameEdT"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="16dp"
+        android:background="@drawable/edit_text_selector"
+        android:hint="Your Name"
+        android:inputType="textPersonName"
+        android:padding="16dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/addUserHintErrorNameTv"
+        style="@style/RedText14"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="10dp"
+        android:text="Requier field"
+        android:visibility="gone"
+        app:layout_constraintStart_toStartOf="@id/addUserNameEdT"
+        app:layout_constraintTop_toBottomOf="@id/addUserNameEdT" />
+
+    <EditText
+        android:id="@+id/addUserEmailEdT"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="16dp"
+        android:background="@drawable/edit_text_selector"
+        android:hint="Email"
+        android:inputType="textEmailAddress"
+        android:padding="16dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/addUserHintErrorNameTv" />
+
+    <TextView
+        android:id="@+id/addUserHintErrorEmailTv"
+        style="@style/RedText14"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="10dp"
+        android:text="Invalid email format"
+        android:visibility="gone"
+        app:layout_constraintStart_toStartOf="@id/addUserEmailEdT"
+        app:layout_constraintTop_toBottomOf="@id/addUserEmailEdT" />
+
+
+    <EditText
+        android:id="@+id/addUserPhoneEdT"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="16dp"
+        android:background="@drawable/edit_text_selector"
+        android:hint="Phone"
+        android:inputType="phone"
+        android:padding="16dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/addUserHintErrorEmailTv" />
+
+    <TextView
+        android:id="@+id/addUserHintPhoneTv"
+        style="@style/GrayText16"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="10dp"
+        android:text="+38(XXX) XXX - XX - XX"
+        app:layout_constraintStart_toStartOf="@id/addUserPhoneEdT"
+        app:layout_constraintTop_toBottomOf="@id/addUserPhoneEdT" />
+
+    <TextView
+        android:id="@+id/addUserHintErrorPhoneTv"
+        style="@style/RedText14"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="10dp"
+        android:text="Requier field"
+        android:visibility="gone"
+        app:layout_constraintStart_toStartOf="@id/addUserPhoneEdT"
+        app:layout_constraintTop_toBottomOf="@id/addUserPhoneEdT"
+        tools:visibility="visible" />
+
+
+    <TextView
+        android:id="@+id/addUserSelectTv"
+        style="@style/BlackText18"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:text="Select your position"
+        app:layout_constraintStart_toStartOf="@id/addUserPhoneEdT"
+        app:layout_constraintTop_toBottomOf="@id/addUserHintPhoneTv" />
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/addUserPositionRV"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+        app:layout_constraintTop_toBottomOf="@id/addUserSelectTv" />
+
+    <androidx.appcompat.widget.LinearLayoutCompat
+        android:id="@+id/addUserPhotoContainer"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="16dp"
+        android:background="@drawable/edit_text_selector"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/addUserPositionRV">
+
+        <TextView
+            android:id="@+id/addUserLoadPhotoTitleTV"
+            style="@style/GrayText16"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:ellipsize="end"
+            android:maxLines="1"
+            android:paddingStart="16dp"
+            android:text="Upload your photo" />
+
+        <TextView
+            android:id="@+id/addUserUploadBtn"
+            style="@style/BlueText16"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:gravity="end"
+            android:padding="16dp"
+            android:text="Upload" />
+    </androidx.appcompat.widget.LinearLayoutCompat>
+
+    <TextView
+        android:id="@+id/addUserHintErrorPhotoTv"
+        style="@style/RedText14"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="10dp"
+        android:text="Photo is requier"
+        android:visibility="gone"
+        app:layout_constraintStart_toStartOf="@id/addUserPhotoContainer"
+        app:layout_constraintTop_toBottomOf="@id/addUserPhotoContainer"
+        tools:visibility="visible" />
+
+
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/addUserSingUpBtn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="@drawable/rounded_yellow_bg"
+        android:text="Sing up"
+        android:textAllCaps="false"
+        android:textColor="@color/black"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/addUserPhotoContainer" />
+</androidx.constraintlayout.widget.ConstraintLayout>
