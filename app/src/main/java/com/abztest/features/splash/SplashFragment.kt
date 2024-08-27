@@ -5,24 +5,20 @@ import android.net.ConnectivityManager
 import android.net.NetworkCapabilities
 import android.os.Bundle
 import android.view.View
-import android.widget.Toast
+import android.widget.LinearLayout
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
-import by.kirich1409.viewbindingdelegate.viewBinding
 import com.abztest.R
-import com.abztest.databinding.FragmentSplashBinding
-import kotlinx.coroutines.CoroutineScope
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.delay
-import kotlinx.coroutines.launch
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class SplashFragment : Fragment(R.layout.fragment_splash) {
 
     private val viewModel: SplashVM by viewModel()
-    val binding: FragmentSplashBinding by viewBinding()
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
+        activity?.findViewById<LinearLayout>(R.id.mainAddUserContainer)?.visibility = View.GONE
+        activity?.findViewById<LinearLayout>(R.id.mainUsersContainer)?.visibility = View.GONE
 
         hideSystemBars()
         isInternetConnection()

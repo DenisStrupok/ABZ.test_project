@@ -12,17 +12,25 @@
         tools:layout="@layout/fragment_splash">
         <action
             android:id="@+id/actionSplashFragmentToHomeFragment"
-            app:destination="@id/homeFragment" />
+            app:destination="@id/usersFragment"
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/slide_out_left"
+            app:popEnterAnim="@anim/slide_in_left"
+            app:popExitAnim="@anim/slide_out_right" />
     </fragment>
     <fragment
-        android:id="@+id/homeFragment"
-        android:name="com.abztest.features.home.HomeFragment"
+        android:id="@+id/usersFragment"
+        android:name="com.abztest.features.users.UsersFragment"
         android:label="HomeFragment"
-        tools:layout="@layout/fragment_home">
+        tools:layout="@layout/fragment_users">
 
         <action
             android:id="@+id/actionHomeFragmentToAddUserFragment"
-            app:destination="@id/addUserFragment" />
+            app:destination="@id/addUserFragment"
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/slide_out_left"
+            app:popEnterAnim="@anim/slide_in_left"
+            app:popExitAnim="@anim/slide_out_right" />
     </fragment>
     <fragment
         android:id="@+id/addUserFragment"
@@ -30,15 +38,33 @@
         android:label="AddUserFragment">
         <action
             android:id="@+id/actionAddUserFragmentToSuccessFragment"
-            app:destination="@id/successFragment" />
+            app:destination="@id/successFragment"
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/slide_out_left"
+            app:popEnterAnim="@anim/slide_in_left"
+            app:popExitAnim="@anim/slide_out_right">
+            <argument
+                android:name="user_id"
+                app:argType="string"
+                app:nullable="false" />
+        </action>
         <action
             android:id="@+id/actionAddUserFragmentToFailedFragment"
-            app:destination="@id/failedFragment" />
+            app:destination="@id/failedFragment"
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/slide_out_left"
+            app:popEnterAnim="@anim/slide_in_left"
+            app:popExitAnim="@anim/slide_out_right" />
     </fragment>
     <fragment
         android:id="@+id/successFragment"
         android:name="com.abztest.features.add.success.SuccessFragment"
-        android:label="SuccessFragment" />
+        android:label="SuccessFragment">
+        <argument
+            android:name="user_id"
+            app:argType="string"
+            app:nullable="false" />
+    </fragment>
     <fragment
         android:id="@+id/failedFragment"
         android:name="com.abztest.features.add.failed.FailedFragment"
@@ -50,5 +76,9 @@
 
     <action
         android:id="@+id/actionGlobalConnectionErrorFragment"
-        app:destination="@id/connectionErrorFragment" />
+        app:destination="@id/connectionErrorFragment"
+        app:enterAnim="@anim/slide_in_right"
+        app:exitAnim="@anim/slide_out_left"
+        app:popEnterAnim="@anim/slide_in_left"
+        app:popExitAnim="@anim/slide_out_right" />
 </navigation>

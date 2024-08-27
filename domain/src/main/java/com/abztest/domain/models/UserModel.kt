@@ -8,7 +8,7 @@ data class UserObjectModel(
     val totalUsers: Int?,
     val count: Int?,
     val links: LinksModel?,
-    val users: List<UserModel>?
+    val users: MutableList<UserModel>?
 )
 
 data class LinksModel(
