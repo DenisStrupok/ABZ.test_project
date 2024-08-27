@@ -61,63 +61,66 @@
         android:layoutAnimation="@anim/rv_animation"
         app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
         app:layout_constraintBottom_toTopOf="@id/homeProgressLoader"
-        app:layout_constraintTop_toBottomOf="@id/topYellowView" />
+        app:layout_constraintTop_toBottomOf="@id/topYellowView"
+        app:layout_constraintVertical_bias="1.0"
+        tools:layout_editor_absoluteX="-142dp" />
 
-    <LinearLayout
-        android:id="@+id/homeUsersContainer"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:gravity="center"
-        app:layout_constraintBottom_toBottomOf="@id/homeAddUserContainer"
-        app:layout_constraintEnd_toStartOf="@id/homeAddUserContainer"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@id/homeAddUserContainer">
+    <!--    <LinearLayout-->
+    <!--        android:id="@+id/homeUsersContainer"-->
+    <!--        android:layout_width="0dp"-->
+    <!--        android:layout_height="wrap_content"-->
+    <!--        android:gravity="center"-->
+    <!--        app:layout_constraintBottom_toBottomOf="@id/homeAddUserContainer"-->
+    <!--        app:layout_constraintEnd_toStartOf="@id/homeAddUserContainer"-->
+    <!--        app:layout_constraintStart_toStartOf="parent"-->
+    <!--        app:layout_constraintTop_toTopOf="@id/homeAddUserContainer">-->
 
-        <ImageView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:src="@drawable/people_selector" />
+    <!--        <ImageView-->
+    <!--            android:layout_width="wrap_content"-->
+    <!--            android:layout_height="wrap_content"-->
+    <!--            android:src="@drawable/people_selector" />-->
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="8dp"
-            android:text="Users"
-            android:textColor="@color/text_selector" />
-    </LinearLayout>
+    <!--        <TextView-->
+    <!--            android:layout_width="wrap_content"-->
+    <!--            android:layout_height="wrap_content"-->
+    <!--            android:layout_marginStart="8dp"-->
+    <!--            android:text="Users"-->
+    <!--            android:textColor="@color/text_selector" />-->
+    <!--    </LinearLayout>-->
 
-    <LinearLayout
-        android:id="@+id/homeAddUserContainer"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_margin="32dp"
-        android:gravity="center"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@id/homeUsersContainer">
+    <!--    <LinearLayout-->
+    <!--        android:id="@+id/homeAddUserContainer"-->
+    <!--        android:layout_width="0dp"-->
+    <!--        android:layout_height="wrap_content"-->
+    <!--        android:layout_margin="32dp"-->
+    <!--        android:gravity="center"-->
+    <!--        app:layout_constraintBottom_toBottomOf="parent"-->
+    <!--        app:layout_constraintEnd_toEndOf="parent"-->
+    <!--        app:layout_constraintStart_toEndOf="@id/homeUsersContainer">-->
 
-        <ImageView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="16dp"
-            android:src="@drawable/add_user_selector" />
+    <!--        <ImageView-->
+    <!--            android:layout_width="wrap_content"-->
+    <!--            android:layout_height="wrap_content"-->
+    <!--            android:layout_marginStart="16dp"-->
+    <!--            android:src="@drawable/add_user_selector" />-->
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="8dp"
-            android:text="Sing up"
-            android:textColor="@color/text_selector" />
-    </LinearLayout>
+    <!--        <TextView-->
+    <!--            android:layout_width="wrap_content"-->
+    <!--            android:layout_height="wrap_content"-->
+    <!--            android:layout_marginStart="8dp"-->
+    <!--            android:text="Sing up"-->
+    <!--            android:textColor="@color/text_selector" />-->
+    <!--    </LinearLayout>-->
     <ProgressBar
         android:id="@+id/homeProgressLoader"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        app:layout_constraintStart_toStartOf="parent"
-        android:progressTint="@color/blue"
         android:layout_marginBottom="16dp"
-        android:visibility="gone"
         android:indeterminateTint="@color/blue"
+        android:progressTint="@color/blue"
+        android:visibility="gone"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintBottom_toTopOf="@id/homeAddUserContainer"/>
+        app:layout_constraintStart_toStartOf="parent"
+        tools:visibility="visible" />
 </androidx.constraintlayout.widget.ConstraintLayout>

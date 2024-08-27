@@ -5,11 +5,15 @@
     android:layout_width="wrap_content"
     android:layout_height="wrap_content">
 
-    <CheckBox
+    <androidx.appcompat.widget.AppCompatRadioButton
         android:id="@+id/itemPositionChBox"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:button="@drawable/check_box_selector"
+        android:layout_width="24dp"
+        android:layout_height="24dp"
+        android:layout_margin="16dp"
+        android:background="@drawable/check_box_selector"
+        android:button="@android:color/transparent"
+        android:checked="true"
+        android:padding="16dp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
@@ -18,6 +22,7 @@
         style="@style/BlackText18"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
         app:layout_constraintBottom_toBottomOf="@id/itemPositionChBox"
         app:layout_constraintStart_toEndOf="@id/itemPositionChBox"
         app:layout_constraintTop_toTopOf="@id/itemPositionChBox"

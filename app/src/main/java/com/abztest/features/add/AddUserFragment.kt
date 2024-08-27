@@ -1,52 +1,61 @@
 package com.abztest.features.add
 
 import android.Manifest
-import android.content.Intent
 import android.content.pm.PackageManager
 import android.net.Uri
 import android.os.Bundle
+import android.os.Environment
 import android.provider.DocumentsContract
 import android.provider.MediaStore
 import android.text.Editable
 import android.text.TextWatcher
 import android.view.View
-import android.widget.Toast
-import androidx.activity.result.ActivityResultLauncher
-import androidx.activity.result.PickVisualMediaRequest
 import androidx.activity.result.contract.ActivityResultContracts
+import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
+import androidx.core.content.FileProvider
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
 import by.kirich1409.viewbindingdelegate.viewBinding
 import com.abztest.R
 import com.abztest.databinding.FragmentAddUserBinding
+import com.abztest.helper.BottomDialog
+import com.abztest.helper.CAMERA_PERMISSION_REQUEST_CODE
+import com.abztest.helper.GALLERY_PERMISSION_REQUEST_CODE
 import org.koin.androidx.viewmodel.ext.android.viewModel
+import java.io.File
 
 class AddUserFragment : Fragment(R.layout.fragment_add_user) {
-
 
     private val binding: FragmentAddUserBinding by viewBinding()
     private val viewModel: AddUserVM by viewModel()
     private lateinit var positionAdapter: PositionAdapter
+    private lateinit var bottomDialog: BottomDialog
+    private lateinit var photoUri: Uri
+    private var absolutePath: String? = null
 
-    private var launcher = registerForActivityResult(ActivityResultContracts.GetContent()) { url ->
-        url?.let {
-            val photo = getPathFromUri(it)
-            if (photo != null) {
-                viewModel.setPhoto(photo)
+    private var launcherGallery =
+        registerForActivityResult(ActivityResultContracts.GetContent()) { url ->
+            url?.let {
+                val photo = getPathFromUri(it)
+                if (photo != null) {
+                    viewModel.setPhoto(photo)
+                }
             }
         }
-    }
+
+    private var cameraLauncher =
+        registerForActivityResult(ActivityResultContracts.TakePicture()) { success ->
+            if (success) {
+                absolutePath?.let { viewModel.setPhoto(it) }
+            }
+        }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        initLauncher()
         initViews()
         initObserver()
-    }
-
-    private fun initLauncher() {
     }
 
     private fun initViews() = with(binding) {
@@ -58,7 +67,7 @@ class AddUserFragment : Fragment(R.layout.fragment_add_user) {
             viewModel.checkFields()
         }
         addUserUploadBtn.setOnClickListener {
-            checkPhotoPermission()
+            showBottomDialog()
         }
 
         addUserNameEdT.isActivated = true
@@ -115,9 +124,7 @@ class AddUserFragment : Fragment(R.layout.fragment_add_user) {
                 }
             }
 
-            override fun afterTextChanged(phone: Editable?) {
-
-            }
+            override fun afterTextChanged(phone: Editable?) {}
 
         })
     }
@@ -199,13 +206,21 @@ class AddUserFragment : Fragment(R.layout.fragment_add_user) {
 
         photo.observe(viewLifecycleOwner) { photo ->
             if (photo.length >= 3) {
+                bottomDialog.dismiss()
                 binding.addUserLoadPhotoTitleTV.text = photo
             }
         }
         userRegistration.observe(viewLifecycleOwner) { user ->
             if (user.id.isNotEmpty()) {
                 when (user.isSuccess) {
-                    true -> findNavController().navigate(R.id.actionAddUserFragmentToSuccessFragment)
+                    true -> {
+                        findNavController().navigate(
+                            AddUserFragmentDirections.actionAddUserFragmentToSuccessFragment(
+                                user.id
+                            )
+                        )
+                    }
+
                     false -> findNavController().navigate(R.id.actionAddUserFragmentToFailedFragment)
                 }
             }
@@ -213,26 +228,46 @@ class AddUserFragment : Fragment(R.layout.fragment_add_user) {
 
     }
 
-    private fun checkPhotoPermission() {
-        if (ContextCompat.checkSelfPermission(
-                requireActivity(),
-                Manifest.permission.READ_EXTERNAL_STORAGE
-            ) != PackageManager.PERMISSION_GRANTED
-        ) {
-            //Permission cancel
-            showMessagePermission()
-        } else {
-            //Permission ok
+    private fun checkGalleryPermission() {
+        if (isGalleryPermissionGranted()) {
             openGallery()
+        } else {
+            ActivityCompat.requestPermissions(
+                requireActivity(),
+                arrayOf(Manifest.permission.READ_EXTERNAL_STORAGE),
+                GALLERY_PERMISSION_REQUEST_CODE
+            )
+        }
+    }
+
+    private fun checkCameraPermission() {
+        if (ContextCompat.checkSelfPermission(requireContext(), Manifest.permission.CAMERA)
+            != PackageManager.PERMISSION_GRANTED
+        ) {
+            ActivityCompat.requestPermissions(
+                requireActivity(),
+                arrayOf(Manifest.permission.CAMERA),
+                CAMERA_PERMISSION_REQUEST_CODE
+            )
+        } else {
+            openCamera()
         }
     }
 
     private fun openGallery() {
-        launcher.launch("image/")
+        launcherGallery.launch("image/")
     }
 
-    private fun showMessagePermission() {
-
+    private fun showBottomDialog() {
+        bottomDialog = BottomDialog(
+            actionOpenCamera = {
+                checkCameraPermission()
+            },
+            actionOpenGallery = {
+                checkGalleryPermission()
+            }
+        )
+        bottomDialog.show(childFragmentManager, bottomDialog.tag)
     }
 
     private fun getPathFromUri(uri: Uri): String? {
@@ -279,5 +314,28 @@ class AddUserFragment : Fragment(R.layout.fragment_add_user) {
             filePath = uri.path
         }
         return filePath
+    }
+
+    private fun openCamera() {
+        photoUri = FileProvider.getUriForFile(
+            requireContext(),
+            "com.abztest.features.main.fileProvider",
+            createPhotoFile().also {
+                absolutePath = it.path
+            }
+        )
+        cameraLauncher.launch(photoUri)
+    }
+
+    private fun createPhotoFile(): File {
+        val storageDir = requireActivity().getExternalFilesDir(Environment.DIRECTORY_PICTURES)
+        return File.createTempFile("camera_image", ".jpg", storageDir)
+    }
+
+    private fun isGalleryPermissionGranted(): Boolean {
+        return ContextCompat.checkSelfPermission(
+            requireContext(),
+            Manifest.permission.READ_EXTERNAL_STORAGE
+        ) == PackageManager.PERMISSION_GRANTED
     }
 }

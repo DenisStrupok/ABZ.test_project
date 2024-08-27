@@ -1,4 +1,4 @@
-package com.abztest.features.home
+package com.abztest.features.users
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
@@ -6,18 +6,17 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.abztest.domain.models.UserModel
 import com.abztest.domain.usecases.user.GetListUsersUseCase
-import com.abztest.features.home.HomeFragment.Companion.SELECTED_TYPE_USERS
 import kotlinx.coroutines.launch
 
-class HomeVM(
+class UsersVM(
     private val getListUsersUseCase: GetListUsersUseCase
 ) : ViewModel() {
     companion object {
         const val PAGE_COUNT = 6
     }
 
-    private val _listUsers = MutableLiveData<List<UserModel>>()
-    val listUsers: LiveData<List<UserModel>> = _listUsers
+    private val _listUsers = MutableLiveData<MutableList<UserModel>>()
+    val listUsers: LiveData<MutableList<UserModel>> = _listUsers
 
     private val _selectedItem = MutableLiveData<String>()
     val selectedItem: LiveData<String> = _selectedItem
@@ -25,20 +24,12 @@ class HomeVM(
     private val _isShowProgressLoader = MutableLiveData(false)
     val isShowProgressLoader: LiveData<Boolean> = _isShowProgressLoader
 
+    private val _userRegisterId = MutableLiveData<String>()
+
+
     private var currentPage = 1
 
-    fun setSelectedItem(type: String) {
-        _selectedItem.value = type
-        actionType()
-    }
-
-    private fun actionType() {
-        when (selectedItem.value) {
-            SELECTED_TYPE_USERS -> getUsers()
-        }
-    }
-
-    private fun getUsers() {
+    fun getUsers() {
         viewModelScope.launch {
             val result = getListUsersUseCase.invoke(
                 GetListUsersUseCase.Params(
@@ -46,8 +37,12 @@ class HomeVM(
                     count = PAGE_COUNT
                 )
             )
-            currentPage = result?.page ?: 0
-            _listUsers.value = result?.users?.sortedBy { it.registrationTime }
+            result?.users?.let { _listUsers.value = it }
+            val newUser = listUsers.value?.find { it.id == _userRegisterId.value?.toInt() }
+            val list: MutableList<UserModel>? =
+                _listUsers.value?.filterNot { it == newUser }?.toMutableList()
+            newUser?.let { list?.add(0, it) }
+            list?.let { _listUsers.value = it }
         }
     }
 
@@ -62,14 +57,16 @@ class HomeVM(
             )
             _isShowProgressLoader.value = false
             currentPage = result?.page ?: 1
-            _listUsers.value = result?.users?.sortedBy { it.registrationTime }
-            listUsers.value.toString()
-            val s = 0
+            _listUsers.value = result?.users ?: mutableListOf()
         }
     }
 
     fun setProgressLoader(isShow: Boolean) {
         _isShowProgressLoader.value = isShow
+    }
+
+    fun setRegisterUserId(id: String) {
+        _userRegisterId.value = id
     }
 
 }

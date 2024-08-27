@@ -12,8 +12,9 @@ data class UsersObjectResponse(
     val totalUsers: Int?,
     val count: Int?,
     val links: LinksResponse?,
-    val users: List<UserResponse>?
+    val users: MutableList<UserResponse>?
 )
+
 fun mapObjectToDomain(response: UsersObjectResponse): UserObjectModel {
     return UserObjectModel(
         success = response.success,
@@ -60,8 +61,8 @@ data class UserResponse(
     }
 }
 
-fun mapListToDomain(list: List<UserResponse>): List<UserModel>? {
-    return list.map { it.mapToDomain() }
+fun mapListToDomain(list: List<UserResponse>): MutableList<UserModel> {
+    return list.map { it.mapToDomain() }.toMutableList()
 }
 
 fun mapLinksToDomain(links: LinksResponse): LinksModel {

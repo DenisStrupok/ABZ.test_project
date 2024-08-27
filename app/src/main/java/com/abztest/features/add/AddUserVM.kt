@@ -36,7 +36,7 @@ class AddUserVM(
     val isEmailValid: LiveData<Boolean> = _isEmailValid
 
     private val _selectedPosition = MutableLiveData<PositionModel>()
-    val selectedPosition: LiveData<PositionModel> = _selectedPosition
+    private val selectedPosition: LiveData<PositionModel> = _selectedPosition
 
     private val _listUserPosition = MutableLiveData<List<PositionModel>>()
     val listUserPosition: LiveData<List<PositionModel>> = _listUserPosition
@@ -87,7 +87,14 @@ class AddUserVM(
 
     private fun getUserPositions() {
         viewModelScope.launch {
-            _listUserPosition.value = getUserPositionsUseCase.invoke(Unit)
+            val positions = getUserPositionsUseCase.invoke(Unit)
+            positions.firstOrNull()?.isSelected = true
+            positions.forEach { position ->
+                if (position.isSelected) {
+                    _selectedPosition.value = position
+                }
+            }
+            _listUserPosition.value = positions
         }
     }
 
@@ -110,7 +117,7 @@ class AddUserVM(
 
     }
 
-    fun isValidEmail(email: String): Boolean {
+    private fun isValidEmail(email: String): Boolean {
         val emailPattern = "^[A-Za-z0-9+_.-]+@(.+)$"
         val pattern = Pattern.compile(emailPattern)
         return pattern.matcher(email).matches()

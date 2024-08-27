@@ -12,7 +12,6 @@ class PositionAdapter(
 ) : RecyclerView.Adapter<PositionAdapter.ViewHolder>() {
 
     private var _items = listOf<PositionModel>()
-    private var selectedPosition: Int? = null
 
     @SuppressLint("NotifyDataSetChanged")
     fun setPositions(list: List<PositionModel>) {
@@ -39,18 +38,20 @@ class PositionAdapter(
     inner class ViewHolder(private val binding: RvItemPositionBinding) :
         RecyclerView.ViewHolder(binding.root) {
         fun bind(item: PositionModel, position: Int) {
-            binding.itemPositionChBox.isChecked = position == selectedPosition
+            binding.itemPositionChBox.isChecked = item.isSelected
             binding.itemPositionChBox.setOnClickListener {
-                if (position != selectedPosition) {
-                    val previousPosition = selectedPosition
-                    selectedPosition = position
-                    notifyItemChanged(previousPosition ?: -1)
-                    notifyItemChanged(position)
-                    actionSelectedPosition?.invoke(item)
-                }
-
+                updateSelection(position)
+                actionSelectedPosition?.invoke(item)
             }
             binding.itemPositionNameTV.text = item.name
         }
+    }
+
+    @SuppressLint("NotifyDataSetChanged")
+    private fun updateSelection(newPosition: Int) {
+        _items = _items.mapIndexed { index, item ->
+            item.copy(isSelected = index == newPosition)
+        }
+        notifyDataSetChanged()
     }
 }
